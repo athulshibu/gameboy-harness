@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Python Control Panel · SkyEmu</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 18px; background: #fafafa; color: #171717; font: 14px system-ui, sans-serif; }
+    .panel { max-width: 770px; margin: 0 auto; padding: 16px 12px 18px; border: 1px solid #dedede; border-radius: 18px; background: #fff; }
+    header { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    h1 { font-size: 16px; margin: 0; font-weight: 650; }
+    .badge { color: #14763c; background: #d6f3e1; padding: 3px 10px; border-radius: 20px; font-size: 12px; }
+    .rom { color: #737373; text-align: center; margin: 16px 0 12px; overflow-wrap: anywhere; }
+    .screen { width: min(480px, 100%); aspect-ratio: 3 / 2; background: #111; border-radius: 8px; margin: auto; overflow: hidden; }
+    #screen { display: block; width: 100%; height: 100%; object-fit: contain; image-rendering: pixelated; }
+    .command { text-align: center; margin: 20px 0 24px; }
+    .muted { color: #737373; }
+    #last-command { font-size: 20px; font-weight: 650; margin: 4px 0 0; min-height: 28px; }
+    .controls { display: flex; flex-direction: column; align-items: center; gap: 7px; }
+    .row { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
+    button { cursor: pointer; border: 1px solid #d6d6d6; border-radius: 22px; background: white; color: #262626; padding: 9px 15px; font: inherit; }
+    button:hover { background: #eee; }
+    button:active { transform: translateY(1px); }
+    button:focus-visible, input:focus-visible { outline: 3px solid #57a77a; outline-offset: 3px; }
+    button:disabled { opacity: .45; cursor: wait; }
+    .direction { background: #101010; border-color: #101010; color: white; width: 50px; height: 37px; padding: 0; font-size: 19px; }
+    .direction:hover { background: #383838; }
+    .ab { background: #f3f3f3; border-color: #f3f3f3; }
+    .duration { margin: 18px 0 14px; text-align: center; }
+    input, select { width: 82px; padding: 7px 8px; margin-left: 8px; border: 1px solid #d6d6d6; border-radius: 8px; font: inherit; }
+    #status { text-align: center; margin: 16px 0 0; min-height: 21px; padding: 0 8px; overflow-wrap: anywhere; }
+    #status.error { color: #b42318; }
+    footer { text-align: center; margin-top: 8px; font-size: 12px; color: #737373; }
+  </style>
+</head>
+<body>
+  <main class="panel">
+    <header><h1>Python Control Panel</h1><span id="badge" class="badge">Connecting</span></header>
+    <p class="rom" id="rom">Connecting…</p>
+    <div class="screen"><img id="screen" alt="Current GBA game screen"></div>
+    <div class="command"><span class="muted">Last command</span><p id="last-command" aria-live="polite">None</p></div>
+    <div class="controls" aria-label="GBA controls">
+      <div class="row"><button class="direction" data-button="UP" aria-label="Up">↑</button></div>
+      <div class="row">
+        <button class="direction" data-button="LEFT" aria-label="Left">←</button>
+        <button class="direction" data-button="DOWN" aria-label="Down">↓</button>
+        <button class="direction" data-button="RIGHT" aria-label="Right">→</button>
+      </div>
+      <div class="row">
+        <button data-button="START">START</button><button data-button="SELECT">SELECT</button>
+        <button class="ab" data-button="A">A</button><button class="ab" data-button="B">B</button>
+      </div>
+    </div>
+    <div class="duration"><label for="frames">Frames per press</label><input id="frames" type="number" min="1" max="3600" step="1" value="{{FRAMES_PER_CLICK}}">
+      <label for="speed">Speed</label><select id="speed"><option value="1">1×</option><option value="2">2×</option><option value="4">4×</option></select>
+    </div>
+    <div class="row">
+      <button id="playback">Pause</button><button id="wait">Wait</button><button id="capture">Save screenshot</button>
+      <button id="save">Save state</button><button id="restore">Restore state</button>
+    </div>
+    <p id="status" class="muted" role="status">Loading screen…</p>
+    <footer>Live video updates continuously. Pause for frame-controlled actions. Video only; no audio.</footer>
+  </main>
+  <script src=/control.js defer></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+# Secrets and machine-specific settings
+.env
+.env.*
+!.env.example
+!.env.*.example
+.aws/
+
+# Python bytecode, environments, and packaging
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+__pypackages__/
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Test, lint, and type-check caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+
+# Frontend dependencies and generated output
+node_modules/
+.next/
+.nuxt/
+.svelte-kit/
+.vite/
+coverage/
+*.tsbuildinfo
+
+# Local ROMs, firmware, and emulator saves
+roms/
+bios/
+*.gba
+*.gb
+*.gbc
+*.sav
+*.srm
+*.ss[0-9]
+*.state
+*.state[0-9]
+
+# Generated sessions, screenshots, memories, and logs
+data/**
+!data/**/
+!data/**/.gitkeep
+*.log
+
+# Downloaded local model weights and caches
+models/
+*.gguf
+*.ggml
+*.safetensors
+.cache/
+
+# Editor and operating-system files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+Desktop.ini
